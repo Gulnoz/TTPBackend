@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_191720) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "balance"
+    t.integer "balance", default: 5000
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
