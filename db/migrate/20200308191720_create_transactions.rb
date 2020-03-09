@@ -1,7 +1,9 @@
 class CreateTransactions < ActiveRecord::Migration[6.0]
   def change
     create_table :transactions do |t|
-      t.string :history
+      t.string :trade
+      t.string :ticker
+      t.integer :price
       t.belongs_to :user
       t.timestamps
     end
