@@ -4,7 +4,7 @@ before_action :transaction_params, only: [:create]
 
 def index
    @transactions = Transaction.all
-   render json: transactionsSerializer.new(@transactions)
+   render json: TransactionSerializer.new(@transactions)
 end
 
 def create 

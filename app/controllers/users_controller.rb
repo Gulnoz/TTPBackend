@@ -37,7 +37,7 @@ def find_user
 end
 
 def user_params
-   params.permit(:name, :email, :password, :balance ||= 5000)
+   params.permit(:name, :email, :password, :balance)
 end
 
 end
