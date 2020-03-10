@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
-
+gem 'jbuilder', '~> 2.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record
@@ -47,3 +47,4 @@ gem 'active_model_serializers'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rest-client', '~> 2.1'
+gem 'activesupport', '~> 6.0', '>= 6.0.2.1'
