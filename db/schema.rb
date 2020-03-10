@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 2020_03_08_191720) do
   enable_extension "plpgsql"
 
   create_table "transactions", force: :cascade do |t|
-    t.string "trade"
+    t.string "trade", default: "Buy"
     t.string "ticker"
+    t.integer "qty"
     t.integer "price"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
