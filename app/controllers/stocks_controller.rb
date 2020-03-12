@@ -12,14 +12,14 @@ render json: @stockAPI
 end
 
 def portfolio
-@transactionSymbols = Transaction.all.map{ |obj| obj['ticker']}.uniq.join(",") 
+@transactionSymbols = User.find(params[:id]).transactions.all.map{ |obj| obj['ticker']}.uniq.join(",") 
 token = ENV['api_key']
 link = 'https://api.worldtradingdata.com/api/v1/stock?&api_token='+token+'&symbol='+@transactionSymbols
 
 @stockAPI = JSON.parse(RestClient.get(link))
 @transactionsPrice = []
 
-Transaction.select("ticker, sum(qty) as shares").group("ticker").each{ |obj| 
+User.find(params[:id]).transactions.select("ticker, sum(qty) as shares").group("ticker").each{ |obj| 
 
     @stockAPI['data'].each{ |stockObj| 
     if stockObj['symbol']===obj['ticker'] 
@@ -36,5 +36,7 @@ private
 def stock_params
    params.permit(:ticker)
 end
-
+def portfolio_params
+   params.permit(:id)
+end
 end

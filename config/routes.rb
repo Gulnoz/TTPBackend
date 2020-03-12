@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 resources :transactions
   resources :users
 get '/stock/:ticker',  to: 'stocks#getStock'
-get '/portfolio',  to: 'stocks#portfolio'
+get '/portfolio/:id',  to: 'stocks#portfolio'
 post '/login', to: 'auth#login'
 get '/auth', to: 'auth#persist'
 end
