@@ -24,7 +24,7 @@ User.find(params[:id]).transactions.select("ticker, sum(qty) as shares").group("
     @stockAPI['data'].each{ |stockObj| 
     if stockObj['symbol']===obj['ticker'] 
         
-        @transactionsPrice.push({'ticker': obj['ticker'], 'shares': obj['shares'] ,'price': stockObj['price'].to_f * obj['shares']})
+        @transactionsPrice.push({'id': obj['id'] 'ticker': obj['ticker'], 'shares': obj['shares'] ,'price': stockObj['price'].to_f * obj['shares']})
     end
     }
 }
