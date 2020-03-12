@@ -1,9 +1,10 @@
 class AuthController < ApplicationController
 MY_SECRET = ENV['my_secret']
-
+before_action :login_params
 
 def login
     @user = User.find_by(email: login_params[:email])
+
     if @user && @user.authenticate(login_params[:password])
         token = JWT.encode({user_id: @user.id}, MY_SECRET, 'HS256')
         render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
