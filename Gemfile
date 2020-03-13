@@ -48,3 +48,5 @@ gem 'active_model_serializers'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rest-client', '~> 2.1'
 gem 'activesupport', '~> 6.0', '>= 6.0.2.1'
+gem 'webpacker'
+gem 'react-rails'
