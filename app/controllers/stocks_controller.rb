@@ -12,19 +12,22 @@ render json: @stockAPI
 end
 
 def portfolio
-@transactionSymbols = User.find(params[:id]).transactions.all.map{ |obj| obj['ticker']}.uniq.join(",") 
+@userTransactions=User.find(params[:id]).transactions
+@transactionSymbols = @userTransactions.map{ |obj| obj['ticker']}.uniq.join(",") 
 token = ENV['api_key']
 link = 'https://api.worldtradingdata.com/api/v1/stock?&api_token='+token+'&symbol='+@transactionSymbols
 
 @stockAPI = JSON.parse(RestClient.get(link))
 @transactionsPrice = []
 
-User.find(params[:id]).transactions.select("ticker, sum(qty) as shares").group("ticker").each{ |obj| 
+@grouped=@userTransactions.select("ticker, sum(qty) as shares").group("ticker")
+
+@grouped.each{ |obj| 
 
     @stockAPI['data'].each{ |stockObj| 
-    if stockObj['symbol']===obj['ticker'] 
+    if obj['ticker'] === stockObj['symbol']
         
-        @transactionsPrice.push({'id': obj['id'] 'ticker': obj['ticker'], 'shares': obj['shares'] ,'price': stockObj['price'].to_f * obj['shares']})
+        @transactionsPrice.push({'ticker': obj['ticker'], 'shares': obj['shares'] ,'price': stockObj['price'].to_i * obj['shares']})
     end
     }
 }
