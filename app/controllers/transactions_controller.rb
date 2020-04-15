@@ -17,7 +17,8 @@ def create
    
    @transaction = Transaction.create!(price: @stockPrice, 'qty': transaction_params[:qty], ticker: transaction_params[:ticker], user_id: transaction_params[:user_id])
   
-  @portfolioTransaction={'ticker': @transaction['ticker'], 'shares': @transaction['qty'] ,'price': @transaction['price'].to_f.round(2) * @transaction['qty']}
+ 
+   @portfolioTransaction={'id': @transaction.id,'ticker': @transaction['ticker'], 'qty': @transaction['qty'] ,'price': @transaction['price'].to_f.round(2) * @transaction['qty']}
   
    render json: @portfolioTransaction
    else

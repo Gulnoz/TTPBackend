@@ -27,7 +27,7 @@ link = 'https://api.worldtradingdata.com/api/v1/stock?&api_token='+token+'&symbo
     @stockAPI['data'].each{ |stockObj| 
     if obj['ticker'] === stockObj['symbol']
         
-        @transactionsPrice.push({'ticker': obj['ticker'], 'shares': obj['shares'] ,'price': stockObj['price'].to_f.round(2) * obj['shares']})
+        @transactionsPrice.push({'ticker': obj['ticker'], 'qty': obj['shares'] ,'price': stockObj['price'].to_f.round(2) * obj['shares']})
     end
     }
 }
