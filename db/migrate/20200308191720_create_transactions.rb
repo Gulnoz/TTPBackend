@@ -4,7 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
       t.string :trade, :default => 'Buy'
       t.string :ticker
       t.integer :qty
-      t.integer :price
+      t.decimal :price, precision: 10, scale: 2 
       t.belongs_to :user
       t.timestamps
     end

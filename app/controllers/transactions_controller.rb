@@ -8,19 +8,25 @@ def index
 end
 
 def create 
-   token = ENV['api_key']
-   link = 'https://fcsapi.com/api-v2/stock/latest?&access_key='+token+'&symbol='+ params[:ticker]
-  @stockAPI = JSON.parse(RestClient.get(link))
-   if @stockAPI.length>0
+#    token = ENV['api_key']
+#    link = 'https://fcsapi.com/api-v2/stock/latest?&access_key='+token+'&symbol='+ params[:ticker]
+#   @stockAPI = JSON.parse(RestClient.get(link))
+#    @portfolioTransaction=[]
+#   if @stockAPI.length>0
 
-  @stockPrice = @stockAPI['response'][0]['price']
+#   @stockPrice = @stockAPI['response'][0]['price']
+  @user = User.find(transaction_params[:user_id]) 
+  @newBalance = @user.balance - transaction_params[:price].to_i
+
+   if @newBalance > 0
    
-   @transaction = Transaction.create!(price: @stockPrice, 'qty': transaction_params[:qty], ticker: transaction_params[:ticker], user_id: transaction_params[:user_id])
-  
+      @transaction = Transaction.create!(price: transaction_params[:price], 'qty': transaction_params[:qty], ticker: transaction_params[:ticker], user_id: transaction_params[:user_id])
+  @user.update('balance': @newBalance)
  
-   @portfolioTransaction={'id': @transaction.id,'ticker': @transaction['ticker'], 'qty': @transaction['qty'] ,'price': @transaction['price'].to_f.round(2) * @transaction['qty']}
+   @portfolioTransaction={'id': @transaction.id,'ticker': @transaction['ticker'], 'qty': @transaction['qty'] ,'price': @transaction['price'] * @transaction['qty']}
   
    render json: @portfolioTransaction
+
    else
       render json: { error: 'failed to create transaction'}, status: :not_acceptable
 
@@ -30,7 +36,7 @@ end
 private
 
 def transaction_params
-   params.permit(:ticker, :qty, :user_id)
+   params.permit(:ticker, :qty, :user_id, :price)
    # params.permit(:trade, :ticker, :price, :user_id)
 end
 

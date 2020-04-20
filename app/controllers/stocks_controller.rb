@@ -12,14 +12,15 @@ render json: @stockAPI
 end
 
 def portfolio
+   
 @userTransactions=User.find(params[:id]).transactions
 @transactionSymbols = @userTransactions.map{ |obj| obj['ticker']}.uniq.join(",") 
-
+@transactionsPrice = []
+if(@transactionSymbols.length>0)
 token = ENV['api_key']
 link = 'https://fcsapi.com/api-v2/stock/latest?&access_key='+token+'&symbol='+@transactionSymbols
 
 @stockAPI = JSON.parse(RestClient.get(link))
-@transactionsPrice = []
 
 @stockAPI=@stockAPI['response'].select{|stock| stock['country']==='united-states' }
 
@@ -30,10 +31,11 @@ if @grouped.length > 0
     @stockAPI.each{ |stockObj| 
     if obj['ticker'] === stockObj['symbol'] 
         
-        @transactionsPrice.push({'ticker': obj['ticker'], 'qty': obj['shares'] ,'price': stockObj['price'].to_f.round(2) * obj['shares']})
+        @transactionsPrice.push({'ticker': obj['ticker'], 'qty': obj['shares'] ,'price': stockObj['price'] * obj['shares']})
     end
     }
 }
+end
 end
 render json: @transactionsPrice
 
