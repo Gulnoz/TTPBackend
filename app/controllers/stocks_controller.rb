@@ -30,8 +30,8 @@ if @grouped.length > 0
 
     @stockAPI.each{ |stockObj| 
     if obj['ticker'] === stockObj['symbol'] 
-        
-        @transactionsPrice.push({'ticker': obj['ticker'], 'qty': obj['shares'] ,'price': stockObj['price'] * obj['shares']})
+        @stockPrice = stockObj['price'].to_f * obj['shares']
+        @transactionsPrice.push({'ticker': obj['ticker'], 'qty': obj['shares'] ,'price': @stockPrice.round(2) })
     end
     }
 }
