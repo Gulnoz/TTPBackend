@@ -11,7 +11,7 @@ def login
     elsif @user && !@user.authenticate(login_params[:password])
         render json: ({'error':'Wrong password'})
     else  
-        render json: ({'error':'Not exist'})
+        render json: ({'error':'User not exist!'})
     end
 end
 def persist
@@ -30,7 +30,7 @@ def persist
              render json: ({'error':'test'})
         end
     else 
-    render json: ({'error':'Not exist'})
+    render json: ({'error':'User not exist!'})
     end
 end
 
