@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_191720) do
     t.string "trade", default: "Buy"
     t.string "ticker"
     t.integer "qty"
-    t.integer "price"
+    t.decimal "price", precision: 10, scale: 2
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
