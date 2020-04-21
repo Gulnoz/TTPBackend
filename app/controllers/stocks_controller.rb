@@ -12,14 +12,14 @@ end
 def portfolio
 @userTransactions=User.find(params[:id]).transactions
 @transactionSymbols = @userTransactions.map{ |obj| obj['ticker']}.uniq.join(",") 
+
 @transactionsPrice = []
 if(@transactionSymbols.length > 0)
 token = ENV['api_key']
 link = 'https://fcsapi.com/api-v2/stock/latest?&access_key='+token+'&symbol='+@transactionSymbols
 
 @stockAPI = JSON.parse(RestClient.get(link))
-
-@stockAPI=@stockAPI['response'].select{|stock| stock['country']==='united-states' }
+@stockAPI=@stockAPI['response'].uniq{|stock| stock['symbol'] }
 
 @grouped=@userTransactions.select("ticker, sum(qty) as shares").group("ticker")
 if @grouped.length > 0
