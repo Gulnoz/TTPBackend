@@ -1,24 +1,31 @@
-# README
+# TTPBackend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Clone this repo.
 
-Things you may want to cover:
+This application was built using Ruby on Rails and PostgreSQL
 
-* Ruby version
+## Prerequisites:
 
-* System dependencies
+Before you begin, ensure you have installed the latest version of:
 
-* Configuration
+rails, PostgreSQL
 
-* Database creation
+1) Install all dependencies in the root folder terminal you should run:
 
-* Database initialization
+### `bundle install`
 
-* How to run the test suite
+### Important: before running this, be sure your PostgreSQL Server is running on your mashine
 
-* Services (job queues, cache servers, search engines, etc.)
+2) Create local database:
 
-* Deployment instructions
+### `rails db:create rails db:migrate`
 
-* ...
+
+### Importan: If you are going to run Client and Server applications in the same mashine,you should run first the server application.
+
+3) Runs the app in the development mode.<br />
+
+### `rails s`
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
