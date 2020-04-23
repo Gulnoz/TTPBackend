@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+ruby '2.6.3'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'jbuilder', '~> 2.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
