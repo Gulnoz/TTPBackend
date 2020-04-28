@@ -51,3 +51,4 @@ gem 'activesupport', '~> 6.0', '>= 6.0.2.1'
 # gem 'webpacker'
 gem 'react-rails'
 gem 'bundler', '~> 2.0', '>= 2.0'
+
